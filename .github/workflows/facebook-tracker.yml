@@ -1,0 +1,30 @@
+name: Facebook Follower Tracker
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  run-tracker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python packages and browser
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run Facebook follower tracker
+        env:
+          WEB_APP_URL: ${{ secrets.WEB_APP_URL }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: python main.py
