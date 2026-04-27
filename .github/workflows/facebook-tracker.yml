@@ -2,7 +2,9 @@ name: Facebook Follower Tracker
 
 on:
   schedule:
-    - cron: "47 8 * * *"
+    - cron: "41 9 * * *"
+    - cron: "43 9 * * *"
+    - cron: "47 9 * * *"
   workflow_dispatch:
 
 jobs:
